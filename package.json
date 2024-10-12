@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "file-saver": "^2.0.5",
-    "ngx-filesaver": "18.0.0"
+    "ngx-filesaver": "18.0.0",
+    "tslib": "^2.7.0"
   },
   "devDependencies": {
     "@angular-eslint/builder": "~18.3.1",

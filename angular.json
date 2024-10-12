@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-lightbox": {
+    "ngx-lightbox-demo": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,9 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "allowedCommonJsDependencies": ["file-saver"],
+            "allowedCommonJsDependencies": [
+              "file-saver"
+            ],
             "outputPath": {
               "base": "dist"
             },
@@ -22,7 +24,11 @@
             "polyfills": [],
             "tsConfig": "tsconfig-demo.json",
             "assets": [
-              { "glob": "**/*", "input": "./demo/img/", "output": "./demo/img/" }
+              {
+                "glob": "**/*",
+                "input": "./demo/img/",
+                "output": "./demo/img/"
+              }
             ],
             "styles": [
               "./src/styles/lightbox.scss",
@@ -48,10 +54,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ngx-lightbox:build:production"
+              "buildTarget": "ngx-lightbox-demo:build:production"
             },
             "development": {
-              "buildTarget": "ngx-lightbox:build:development"
+              "buildTarget": "ngx-lightbox-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -66,11 +72,55 @@
           }
         }
       }
+    },
+    "ngx-lightbox": {
+      "projectType": "library",
+      "root": "projects/ngx-lightbox",
+      "sourceRoot": "projects/ngx-lightbox/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/ngx-lightbox/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-lightbox/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-lightbox/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ngx-lightbox/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-lightbox/**/*.ts",
+              "projects/ngx-lightbox/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
     "analytics": false,
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "schematics": {
     "@angular-eslint/schematics:application": {

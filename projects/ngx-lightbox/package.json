@@ -1,0 +1,12 @@
+{
+  "name": "ngx-lightbox",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^18.2.7",
+    "@angular/core": "^18.2.7"
+  },
+  "dependencies": {
+    "tslib": "^2.7.0"
+  },
+  "sideEffects": false
+}

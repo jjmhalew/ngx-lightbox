@@ -40,6 +40,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.4.0",
     "karma-webpack": "^5.0.1",
+    "ng-packagr": "^18.2.1",
     "phantomjs-prebuilt": "^2.1.16",
     "rxjs": "^7.8.1",
     "typescript": "5.5.4",
@@ -48,7 +49,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/ng serve",
-    "build": "./node_modules/.bin/ng build",
+    "build": "ng-packagr -p ng-package.json",
     "test": " ./node_modules/.bin/ng lint && ./node_modules/.bin/ng test",
     "lint": "./node_modules/.bin/ng lint",
     "prepublishOnly": "rm -r ./.angular && ./node_modules/.bin/ngc && ./node_modules/.bin/copyfiles -u 1 src/img/* src/*.js src/*.d.ts src/*.js.map src/*.metadata.json src/*.css .",

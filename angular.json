@@ -22,7 +22,7 @@
             "index": "index.html",
             "browser": "demo/main.ts",
             "polyfills": [],
-            "tsConfig": "tsconfig-demo.json",
+            "tsConfig": "tsconfig.json",
             "assets": [
               {
                 "glob": "**/*",

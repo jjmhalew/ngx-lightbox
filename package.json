@@ -1,7 +1,7 @@
 {
   "name": "@jjmhalew/ngx-lightbox",
   "version": "18.0.0",
-  "description": "A port >= Angular 18 for lightbox2",
+  "description": "A port >= Angular 18 for lightbox2. Forked and build upon from themyth92",
   "main": "index.js",
   "dependencies": {
     "file-saver": "^2.0.5",
@@ -68,7 +68,7 @@
     "zoneless",
     "directives"
   ],
-  "author": "jjmhalew (OG themyth92)",
+  "author": "jjmhalew",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jjmhalew/ngx-lightbox/issues"

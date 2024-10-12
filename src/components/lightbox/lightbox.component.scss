@@ -2,39 +2,6 @@ html.lb-disable-scrolling {
   overflow: hidden;
 }
 
-.lightboxOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background-color: black;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-  opacity: 0.8;
-}
-
-.lightbox {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  z-index: 10000;
-  text-align: center;
-  line-height: 0;
-  font-weight: normal;
-  box-sizing: content-box;
-  outline: none;
-}
-
-.lightbox .lb-image {
-  height: auto;
-  max-width: inherit;
-  max-height: none;
-  border-radius: 3px;
-}
-
-.lightbox a img {
-  border: none;
-}
-
 .lb-outerContainer {
   position: relative;
   zoom: 1;
@@ -278,56 +245,17 @@ html.lb-disable-scrolling {
   opacity: 1;
 }
 
-/* animation */
-@keyframes fadeIn {    
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-
-@keyframes fadeOut {    
-  0% {opacity: 1;}
-  100% {opacity: 0;}
-}
-
-@keyframes fadeInOverlay {    
-  0% {opacity: 0;}
-  100% {opacity: 0.8;}
-}
-
-@keyframes fadeOutOverlay {    
-  0% {opacity: 0.8;}
-  100% {opacity: 0;}
-}
-
-.fadeIn {
-  animation-name: fadeIn; 
-}
-
-.fadeInOverlay {
-  animation-name: fadeInOverlay;
-}
-
-.fadeOut {
-  animation-name: fadeOut;
-}
-
-.fadeOutOverlay {
-  animation-name: fadeOutOverlay;
-}
-
-.animation {
-  animation-fill-mode: both;
-}
-
 .transition {
   /* Standard syntax */
   transition-property: all;
   transition-timing-function: ease;
 }
 
+.animation {
+  animation-fill-mode: both;
+}
+
 .lb-image {
   transition-duration: 0.5s;
   transition-property: transform;
 }
-
-/* animation */

@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from "@angular/common";
+import { DOCUMENT } from "@angular/common";
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -22,64 +22,15 @@ import { IAlbum, IEvent, LIGHTBOX_EVENT, LightboxEvent, LightboxWindowRef } from
 import { LightboxUiConfig } from "../../services/lightbox-ui-config";
 
 @Component({
-  template: ` <div class="lb-outerContainer transition" #outerContainer id="outerContainer">
-      <div class="lb-container" #container id="container">
-        <img
-          class="lb-image"
-          id="image"
-          [src]="album()![currentImageIndex()!].src"
-          class="lb-image animation fadeIn"
-          [hidden]="ui().showReloader"
-          #image />
-        <div class="lb-nav" [hidden]="!ui().showArrowNav" #navArrow>
-          <a class="lb-prev" [hidden]="!ui().showLeftArrow" (click)="prevImage()" #leftArrow></a>
-          <a class="lb-next" [hidden]="!ui().showRightArrow" (click)="nextImage()" #rightArrow></a>
-        </div>
-        <div class="lb-loader" [hidden]="!ui().showReloader" (click)="close($event)">
-          <a class="lb-cancel"></a>
-        </div>
-      </div>
-    </div>
-    <div class="lb-dataContainer" [hidden]="ui().showReloader" #dataContainer>
-      <div class="lb-data">
-        <div class="lb-details">
-          <span
-            class="lb-caption animation fadeIn"
-            [hidden]="!ui().showCaption"
-            [innerHtml]="album()![currentImageIndex()!].caption"
-            #caption>
-          </span>
-          <span class="lb-number animation fadeIn" [hidden]="!ui().showPageNumber" #number>{{ contentPageNumber() }}</span>
-        </div>
-        <div class="lb-controlContainer">
-          <div class="lb-closeContainer">
-            <a class="lb-close" (click)="close($event)"></a>
-          </div>
-          <div class="lb-downloadContainer" [hidden]="!ui().showDownloadButton">
-            <a class="lb-download" (click)="download($event)"></a>
-          </div>
-          <div class="lb-downloadContainer" [hidden]="!ui().showDownloadExtButton">
-            <a class="lb-download" (click)="downloadExt()"></a>
-          </div>
-          <div class="lb-turnContainer" [hidden]="!ui().showRotateButton">
-            <a class="lb-turnLeft" (click)="control($event)"></a>
-            <a class="lb-turnRight" (click)="control($event)"></a>
-          </div>
-          <div class="lb-zoomContainer" [hidden]="!ui().showZoomButton">
-            <a class="lb-zoomOut" (click)="control($event)"></a>
-            <a class="lb-zoomIn" (click)="control($event)"></a>
-          </div>
-        </div>
-      </div>
-    </div>`,
+  templateUrl: "./lightbox.component.html",
   selector: "[lb-content]",
   host: {
     "(click)": "close($event)",
     "[class]": "ui().classList",
   },
   standalone: true,
-  imports: [CommonModule],
-  providers: [LightboxEvent, LightboxWindowRef],
+  styleUrl: "./lightbox.component.scss",
+  imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnInit {
@@ -92,7 +43,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   private _sanitizer = inject(DomSanitizer);
   private _documentRef: Document = inject(DOCUMENT);
 
-  public album = model<IAlbum[]>([]);
+  public albums = model<IAlbum[]>([]);
   public currentImageIndex = model<number>(0);
   public options = model<Partial<LightboxConfig>>({});
   public cmpRef = model<ComponentRef<LightboxComponent>>();
@@ -122,7 +73,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }; */
   private _event: any;
   private _windowRef: Window & typeof globalThis;
-  private rotate: number = 0;
+  private rotate = signal<number>(0);
 
   constructor() {
     // initialize data
@@ -134,7 +85,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   public ngOnInit(): void {
-    this.album()?.forEach(album => {
+    this.albums()?.forEach(album => {
       if (album.caption) {
         album.caption = this._sanitizer.sanitize(SecurityContext.HTML, album.caption) ?? "";
       }
@@ -184,14 +135,14 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   public downloadExt(): void {
     this._lightboxEvent.broadcastLightboxEvent({
       id: LIGHTBOX_EVENT.DOWNLOAD,
-      data: this.album()![this.currentImageIndex()!],
+      data: this.albums()[this.currentImageIndex()],
     });
   }
 
   public download($event: any): void {
     $event.stopPropagation();
-    const url = this.album()![this.currentImageIndex()!].src;
-    const downloadUrl = this.album()![this.currentImageIndex()!].downloadUrl;
+    const url = this.albums()[this.currentImageIndex()].src;
+    const downloadUrl = this.albums()[this.currentImageIndex()].downloadUrl;
     const parts = url.split("/");
     const fileName = parts[parts.length - 1];
     const canvas = document.createElement("canvas");
@@ -225,16 +176,16 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     let height: number;
     let width: number;
     if ($event.target.classList.contains("lb-turnLeft")) {
-      this.rotate = this.rotate - 90;
+      this.rotate.set(this.rotate() - 90);
       this._rotateContainer();
       this._calcTransformPoint();
-      this._imageElem()!.nativeElement.style.transform = `rotate(${this.rotate}deg)`;
+      this._imageElem()!.nativeElement.style.transform = `rotate(${this.rotate()}deg)`;
       this._lightboxEvent.broadcastLightboxEvent({ id: LIGHTBOX_EVENT.ROTATE_LEFT, data: null });
     } else if ($event.target.classList.contains("lb-turnRight")) {
-      this.rotate = this.rotate + 90;
+      this.rotate.set(this.rotate() + 90);
       this._rotateContainer();
       this._calcTransformPoint();
-      this._imageElem()!.nativeElement.style.transform = `rotate(${this.rotate}deg)`;
+      this._imageElem()!.nativeElement.style.transform = `rotate(${this.rotate()}deg)`;
       this._lightboxEvent.broadcastLightboxEvent({ id: LIGHTBOX_EVENT.ROTATE_RIGHT, data: null });
     } else if ($event.target.classList.contains("lb-zoomOut")) {
       height = parseInt(this._outerContainerElem()!.nativeElement.style.height, 10) / 1.5;
@@ -260,7 +211,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   private _rotateContainer(): void {
-    let temp = this.rotate;
+    let temp = this.rotate();
     if (temp < 0) {
       temp *= -1;
     }
@@ -278,15 +229,15 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   private _resetImage(): void {
-    this.rotate = 0;
-    this._imageElem()!.nativeElement.style.transform = `rotate(${this.rotate}deg)`;
-    this._imageElem()!.nativeElement.style.webkitTransform = `rotate(${this.rotate}deg)`;
+    this.rotate.set(0);
+    this._imageElem()!.nativeElement.style.transform = `rotate(${this.rotate()}deg)`;
+    this._imageElem()!.nativeElement.style.webkitTransform = `rotate(${this.rotate()}deg)`;
   }
 
   private _calcTransformPoint(): void {
     const height = parseInt(this._imageElem()!.nativeElement.style.height, 10);
     const width = parseInt(this._imageElem()!.nativeElement.style.width, 10);
-    let temp = this.rotate % 360;
+    let temp = this.rotate() % 360;
     if (temp < 0) {
       temp = 360 + temp;
     }
@@ -300,31 +251,31 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   public nextImage(): void {
-    if (this.album()!.length === 1) {
+    if (this.albums().length === 1) {
       return;
-    } else if (this.currentImageIndex() === this.album()!.length - 1) {
+    } else if (this.currentImageIndex() === this.albums().length - 1) {
       this._changeImage(0);
     } else {
-      this._changeImage(this.currentImageIndex()! + 1);
+      this._changeImage(this.currentImageIndex() + 1);
     }
   }
 
   public prevImage(): void {
-    if (this.album()!.length === 1) {
+    if (this.albums().length === 1) {
       return;
-    } else if (this.currentImageIndex() === 0 && this.album()!.length > 1) {
-      this._changeImage(this.album()!.length - 1);
+    } else if (this.currentImageIndex() === 0 && this.albums().length > 1) {
+      this._changeImage(this.albums().length - 1);
     } else {
-      this._changeImage(this.currentImageIndex()! - 1);
+      this._changeImage(this.currentImageIndex() - 1);
     }
   }
 
   private _validateInputData(): boolean {
-    if (this.album() && this.album() instanceof Array && this.album()!.length > 0) {
-      for (let i = 0; i < this.album()!.length; i++) {
+    if (this.albums() && this.albums() instanceof Array && this.albums().length > 0) {
+      for (let i = 0; i < this.albums().length; i++) {
         // check whether each _nside
         // album has src data or not
-        if (this.album()![i].src) {
+        if (this.albums()[i].src) {
           continue;
         }
 
@@ -336,7 +287,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
 
     // to prevent data understand as string
     // convert it to number
-    if (isNaN(this.currentImageIndex()!)) {
+    if (isNaN(this.currentImageIndex())) {
       throw new Error("Current image index is not a number");
     } else {
       this.currentImageIndex.set(Number(this.currentImageIndex()));
@@ -352,7 +303,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
       this._onLoadImageSuccess();
     };
 
-    const src: string = this.album()![this.currentImageIndex()!].src;
+    const src: string = this.albums()[this.currentImageIndex()].src;
     preloader.src = this._sanitizer.sanitize(SecurityContext.URL, src) ?? "";
   }
 
@@ -551,27 +502,24 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
 
   private _updateDetails(): void {
     // update the caption
-    if (
-      typeof this.album()![this.currentImageIndex()!].caption !== "undefined" &&
-      this.album()![this.currentImageIndex()!].caption !== ""
-    ) {
+    if (typeof this.albums()[this.currentImageIndex()].caption !== "undefined" && this.albums()[this.currentImageIndex()].caption !== "") {
       this.ui().showCaption = true;
     }
 
     // update the page number if user choose to do so
     // does not perform numbering the page if the
     // array length in album <= 1
-    if (this.album()!.length > 1 && this.options().showImageNumberLabel) {
+    if (this.albums().length > 1 && this.options().showImageNumberLabel) {
       this.ui().showPageNumber = true;
       this.contentPageNumber.set(this._albumLabel());
     }
   }
 
   private _albumLabel(): string {
-    // due to {this.currentImageIndex()!} is set from 0 to {this.album()!.length} - 1
+    // due to {this.currentImageIndex()} is set from 0 to {this.album().length} - 1
     return this.options()
-      .albumLabel!.replace(/%1/g, (this.currentImageIndex()! + 1).toString())
-      .replace(/%2/g, this.album()!.length.toString());
+      .albumLabel!.replace(/%1/g, (this.currentImageIndex() + 1).toString())
+      .replace(/%2/g, this.albums().length.toString());
   }
 
   private _changeImage(newIndex: number): void {
@@ -605,7 +553,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     // initially show the arrow nav
     // which is the parent of both left and right nav
     this._showArrowNav();
-    if (this.album()!.length > 1) {
+    if (this.albums().length > 1) {
       if (this.options().wrapAround) {
         if (alwaysShowNav) {
           // alternatives this.$lightbox.find('.lb-prev, .lb-next').css('opacity', '1');
@@ -617,7 +565,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
         this._showLeftArrowNav();
         this._showRightArrowNav();
       } else {
-        if (this.currentImageIndex()! > 0) {
+        if (this.currentImageIndex() > 0) {
           // alternatives this.$lightbox.find('.lb-prev').show();
           this._showLeftArrowNav();
           if (alwaysShowNav) {
@@ -626,7 +574,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
           }
         }
 
-        if (this.currentImageIndex()! < this.album()!.length - 1) {
+        if (this.currentImageIndex() < this.albums().length - 1) {
           // alternatives this.$lightbox.find('.lb-next').show();
           this._showRightArrowNav();
           if (alwaysShowNav) {
@@ -647,7 +595,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   private _showArrowNav(): void {
-    this.ui().showArrowNav = this.album()!.length !== 1;
+    this.ui().showArrowNav = this.albums().length !== 1;
   }
 
   private _enableKeyboardNav(): void {
@@ -662,7 +610,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     }
   }
 
-  private _keyboardAction($event: any): void {
+  private _keyboardAction($event: KeyboardEvent): void {
     const KEYCODE_ESC = 27;
     const KEYCODE_LEFTARROW = 37;
     const KEYCODE_RIGHTARROW = 39;
@@ -673,14 +621,14 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
       this._lightboxEvent.broadcastLightboxEvent({ id: LIGHTBOX_EVENT.CLOSE, data: null });
     } else if (key === "p" || keycode === KEYCODE_LEFTARROW) {
       if (this.currentImageIndex() !== 0) {
-        this._changeImage(this.currentImageIndex()! - 1);
-      } else if (this.options().wrapAround && this.album()!.length > 1) {
-        this._changeImage(this.album()!.length - 1);
+        this._changeImage(this.currentImageIndex() - 1);
+      } else if (this.options().wrapAround && this.albums().length > 1) {
+        this._changeImage(this.albums().length - 1);
       }
     } else if (key === "n" || keycode === KEYCODE_RIGHTARROW) {
-      if (this.currentImageIndex() !== this.album()!.length - 1) {
-        this._changeImage(this.currentImageIndex()! + 1);
-      } else if (this.options().wrapAround && this.album()!.length > 1) {
+      if (this.currentImageIndex() !== this.albums().length - 1) {
+        this._changeImage(this.currentImageIndex() + 1);
+      } else if (this.options().wrapAround && this.albums().length > 1) {
         this._changeImage(0);
       }
     }

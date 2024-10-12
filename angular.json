@@ -31,7 +31,7 @@
               }
             ],
             "styles": [
-              "./src/styles/lightbox.scss",
+              "./projects/ngx-lightbox/src/lib/styles/lightbox.scss",
               "demo/app.css"
             ],
             "scripts": []

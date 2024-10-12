@@ -63,8 +63,9 @@
     "url": "git+https://github.com/jjmhalew/ngx-lightbox.git"
   },
   "keywords": [
-    "lightbox2",
+    "lightbox",
     "angular",
+    "zoneless",
     "directives"
   ],
   "author": "jjmhalew (OG themyth92)",

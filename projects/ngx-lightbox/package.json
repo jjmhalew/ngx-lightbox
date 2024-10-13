@@ -1,0 +1,24 @@
+{
+  "name": "@jjmhalew/ngx-lightbox",
+  "version": "18.2.1",
+  "description": "Lightbox for Angular >= 18 (zoneless). Originally by themyth92",
+  "author": "Jim Halewijn",
+  "license": "MIT",
+  "keywords": [
+    "lightbox",
+    "angular",
+    "zoneless",
+    "directives",
+    "library"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^18.2.8",
+    "@angular/core": "^18.2.8",
+    "file-saver": "^2.0.5",
+    "ngx-filesaver": "18.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.7.0"
+  },
+  "sideEffects": false
+}

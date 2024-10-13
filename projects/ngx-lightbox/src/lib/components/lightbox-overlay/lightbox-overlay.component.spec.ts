@@ -25,7 +25,7 @@ describe("[ Unit - LightboxOverlayComponent ]", () => {
     fixture = TestBed.createComponent(LightboxOverlayComponent);
 
     // mock options and ref
-    fixture.componentInstance.options = mockData.options;
+    fixture.componentInstance.options.set(mockData.options);
     // @ts-ignore
     fixture.componentInstance.cmpRef.set({ destroy: jasmine.createSpy("spy") });
     fixture.detectChanges();

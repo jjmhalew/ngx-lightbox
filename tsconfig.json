@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./compiled",
+    "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -13,6 +13,11 @@
     "sourceMap": true,
     "declaration": false,
     "isolatedModules": true,
+    "paths": {
+      "ngx-lightbox": [
+        "./dist/ngx-lightbox"
+      ]
+    },
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,

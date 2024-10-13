@@ -17,7 +17,7 @@
               "file-saver"
             ],
             "outputPath": {
-              "base": "dist"
+              "base": "dist/ngx-lightbox-demo"
             },
             "index": "index.html",
             "browser": "demo/main.ts",
@@ -63,11 +63,23 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/index.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.json",
-            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "./projects/ngx-lightbox/src/lib/styles/lightbox.scss"
+            ],
             "scripts": []
           }
         }
@@ -95,7 +107,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ngx-lightbox/tsconfig.spec.json",
             "polyfills": [

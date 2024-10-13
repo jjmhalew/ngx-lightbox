@@ -2,8 +2,8 @@ import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http"
 import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { ComponentFixture, inject, TestBed } from "@angular/core/testing";
 
-import { LightboxComponent } from "./lightbox.component";
 import { LIGHTBOX_EVENT, LightboxEvent, LightboxWindowRef } from "../../services/lightbox-event.service";
+import { LightboxComponent } from "./lightbox.component";
 
 describe("[ Unit - LightboxComponent ]", () => {
   let fixture: ComponentFixture<LightboxComponent>;
@@ -63,10 +63,10 @@ describe("[ Unit - LightboxComponent ]", () => {
       showDownloadButton: false,
       classList: "lightbox animation fadeIn",
     });
-    expect(fixture.componentInstance.contentPageNumber).toEqual({ pageNumber: "" });
-    expect(fixture.componentInstance.album).toEqual(mockData.album);
-    expect(fixture.componentInstance.options).toEqual(mockData.options);
-    expect(fixture.componentInstance.currentImageIndex).toEqual(mockData.currentIndex);
+    expect(fixture.componentInstance.contentPageNumber()).toEqual("");
+    expect(fixture.componentInstance.albums()).toEqual(mockData.album);
+    expect(fixture.componentInstance.options()).toEqual(mockData.options);
+    expect(fixture.componentInstance.currentImageIndex()).toEqual(mockData.currentIndex);
   });
 
   describe("{ method: ngOnDestroy }", () => {
@@ -197,9 +197,9 @@ describe("[ Unit - LightboxComponent ]", () => {
     fixture = TestBed.createComponent(LightboxComponent);
 
     // mock options and ref
-    fixture.componentInstance.options = mockData.options;
-    fixture.componentInstance.album = mockData.album;
-    fixture.componentInstance.currentImageIndex = mockData.currentIndex;
+    fixture.componentInstance.options.set(mockData.options);
+    fixture.componentInstance.albums.set(mockData.album);
+    fixture.componentInstance.currentImageIndex.set(mockData.currentIndex);
     // @ts-ignore
     fixture.componentInstance.cmpRef.set({ destroy: jasmine.createSpy("spy") });
     fixture.detectChanges();

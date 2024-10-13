@@ -78,7 +78,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "./projects/ngx-lightbox/src/lib/styles/lightbox.scss"
             ],
             "scripts": []
           }

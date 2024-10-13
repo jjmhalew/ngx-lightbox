@@ -48,7 +48,7 @@
   "scripts": {
     "start": "ng serve",
     "build:ngx-lightbox": "ng build ngx-lightbox",
-    "test": " ng lint && ng test",
+    "test": " ng lint && ng test ngx-lightbox",
     "lint": "ng lint"
   },
   "engines": {

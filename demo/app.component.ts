@@ -1,11 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
+import { IAlbum, IEvent, Lightbox, LIGHTBOX_EVENT, LightboxConfig, LightboxEvent, LightboxModule } from "ngx-lightbox";
 import { Subscription } from "rxjs";
-
-import { LightboxModule } from "../projects/ngx-lightbox/src/lib/lightbox.module";
-import { Lightbox } from "../projects/ngx-lightbox/src/lib/services/lightbox.service";
-import { LightboxConfig } from "../projects/ngx-lightbox/src/lib/services/lightbox-config.service";
-import { IAlbum, IEvent, LIGHTBOX_EVENT, LightboxEvent } from "../projects/ngx-lightbox/src/lib/services/lightbox-event.service";
 
 @Component({
   selector: "demo",

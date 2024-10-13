@@ -4,6 +4,7 @@
   "description": "A port >= Angular 18 for lightbox2. Forked and build upon from themyth92",
   "main": "index.js",
   "dependencies": {
+    "@jjmhalew/ngx-lightbox": "file:dist/ngx-lightbox",
     "file-saver": "^2.0.5",
     "ngx-filesaver": "18.0.0",
     "tslib": "^2.7.0"

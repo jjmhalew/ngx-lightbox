@@ -2,6 +2,7 @@ import { DOCUMENT } from "@angular/common";
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ComponentRef,
   ElementRef,
@@ -41,6 +42,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   private _lightboxWindowRef = inject(LightboxWindowRef);
   private _fileSaverService = inject(FileSaverService);
   private _sanitizer = inject(DomSanitizer);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
   private _documentRef: Document = inject(DOCUMENT);
 
   public albums = model<IAlbum[]>([]);
@@ -439,6 +441,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     if (!this.options().disableKeyboardNav) {
       this._enableKeyboardNav();
     }
+    this._changeDetectorRef.detectChanges(); // needed due to otherwise zoneless reload icon will stay in-screen until click-event happens
   }
 
   private _prepareComponent(): void {

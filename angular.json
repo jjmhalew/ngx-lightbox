@@ -17,7 +17,7 @@
               "file-saver"
             ],
             "outputPath": {
-              "base": "dist"
+              "base": "dist/ngx-lightbox-demo"
             },
             "index": "index.html",
             "browser": "demo/main.ts",

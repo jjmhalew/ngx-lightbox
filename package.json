@@ -46,7 +46,7 @@
   },
   "scripts": {
     "start": "ng serve",
-    "build": "ng build ngx-lightbox",
+    "build:ngx-lightbox": "ng build ngx-lightbox",
     "test": " ng lint && ng test",
     "lint": "ng lint"
   },

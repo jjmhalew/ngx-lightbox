@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="717.2" height="758" viewBox="0 0 717.2 758">
+  <defs>
+    <radialGradient id="radial-gradient" cx="-0.308" cy="0.547" r="1.453" gradientTransform="matrix(0.999, 0.033, -0.017, 0.532, 0.009, 0.266)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#dfedf1"/>
+      <stop offset="1" stop-color="#69bbe6"/>
+    </radialGradient>
+    <filter id="Path_1" x="432.6" y="0" width="284.6" height="537.7" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <radialGradient id="radial-gradient-2" cx="0.487" cy="-1.383" r="2.383" gradientTransform="matrix(0, 1, -0.547, 0, -0.269, -1.871)" xlink:href="#radial-gradient"/>
+    <filter id="Path_2" x="167.2" y="546.1" width="382.8" height="211.9" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <radialGradient id="radial-gradient-3" cx="1.308" cy="0.547" r="1.453" gradientTransform="matrix(-0.999, 0.033, 0.017, 0.532, 2.605, 0.214)" xlink:href="#radial-gradient"/>
+    <filter id="Path_12" x="0" y="0" width="284.6" height="537.7" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <radialGradient id="radial-gradient-4" cx="0.5" cy="0.589" r="0.756" gradientTransform="translate(0 0.074) scale(1 0.852)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#69bbe6"/>
+      <stop offset="1" stop-color="#dfedf1"/>
+    </radialGradient>
+    <filter id="Path_3" x="254.1" y="197.2" width="209.1" height="250.3" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="ngx-lightbox-logo" transform="translate(-121 -103.8)">
+    <g transform="matrix(1, 0, 0, 1, 121, 103.8)" filter="url(#Path_1)">
+      <path id="Path_1-2" data-name="Path 1" d="M562.6,109.8,804.1,629.5l25.1-396.4Z" transform="translate(-121 -103.8)" fill="url(#radial-gradient)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 121, 103.8)" filter="url(#Path_2)">
+      <path id="Path_2-2" data-name="Path 2" d="M624.9,655.9H334.3l-37.1,89.9,182.4,104L662,745.8Z" transform="translate(-121 -103.8)" fill="url(#radial-gradient-2)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 121, 103.8)" filter="url(#Path_12)">
+      <path id="Path_12-2" data-name="Path 12" d="M829.2,109.8,587.7,629.5,562.6,233.1Z" transform="translate(-553.6 -103.8)" fill="url(#radial-gradient-3)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 121, 103.8)" filter="url(#Path_3)">
+      <path id="Path_3-2" data-name="Path 3" d="M384.1,539.3H575.2L479.6,307Z" transform="translate(-121 -103.8)" fill="url(#radial-gradient-4)"/>
+    </g>
+  </g>
+</svg>

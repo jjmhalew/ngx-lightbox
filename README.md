@@ -1,7 +1,6 @@
 # Ngx-Lightbox
 
-![Alt text](./demo/img/ngx-lightbox-logo.svg)
-<img src="./demo/img/ngx-lightbox-logo.svg">
+<img width="100px" src="./demo/img/ngx-lightbox-logo.svg">
 
 A [lightbox2](https://github.com/lokesh/lightbox2) implementation port to use with Angular >= 18 (zoneless)
 

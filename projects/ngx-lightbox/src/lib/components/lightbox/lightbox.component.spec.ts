@@ -23,7 +23,7 @@ describe("[ Unit - LightboxComponent ]", () => {
         disableKeyboardNav: false,
       },
       currentIndex: 1,
-      album: [
+      albums: [
         {
           src: "src/img/next.png",
           thumb: "thumb1",
@@ -51,7 +51,7 @@ describe("[ Unit - LightboxComponent ]", () => {
   }));
 
   it("should initialize component with correct styling and default value", () => {
-    expect(fixture.componentInstance.ui).toEqual({
+    expect(fixture.componentInstance.ui()).toEqual({
       showReloader: true,
       showLeftArrow: false,
       showRightArrow: false,
@@ -61,10 +61,11 @@ describe("[ Unit - LightboxComponent ]", () => {
       showZoomButton: false,
       showRotateButton: false,
       showDownloadButton: false,
+      showDownloadExtButton: false,
       classList: "lightbox animation fadeIn",
     });
     expect(fixture.componentInstance.contentPageNumber()).toEqual("");
-    expect(fixture.componentInstance.albums()).toEqual(mockData.album);
+    expect(fixture.componentInstance.albums()).toEqual(mockData.albums);
     expect(fixture.componentInstance.options()).toEqual(mockData.options);
     expect(fixture.componentInstance.currentImageIndex()).toEqual(mockData.currentIndex);
   });
@@ -112,7 +113,7 @@ describe("[ Unit - LightboxComponent ]", () => {
       fixture.componentInstance["_event"].load = jasmine.createSpy("load");
       spyOn(lightboxEvent, "broadcastLightboxEvent");
       fixture.componentInstance.nextImage();
-      expect(fixture.componentInstance.ui).toEqual({
+      expect(fixture.componentInstance.ui()).toEqual({
         showReloader: true,
         showLeftArrow: false,
         showRightArrow: false,
@@ -122,6 +123,7 @@ describe("[ Unit - LightboxComponent ]", () => {
         showRotateButton: false,
         showCaption: false,
         showDownloadButton: false,
+        showDownloadExtButton: false,
         classList: "lightbox animation fadeIn",
       });
       expect(lightboxEvent.broadcastLightboxEvent).toHaveBeenCalledTimes(1);
@@ -132,7 +134,7 @@ describe("[ Unit - LightboxComponent ]", () => {
       fixture.componentInstance["_event"].load = jasmine.createSpy("load");
       spyOn(lightboxEvent, "broadcastLightboxEvent");
       fixture.componentInstance.nextImage();
-      expect(fixture.componentInstance.ui).toEqual({
+      expect(fixture.componentInstance.ui()).toEqual({
         showReloader: true,
         showLeftArrow: false,
         showZoomButton: false,
@@ -142,6 +144,7 @@ describe("[ Unit - LightboxComponent ]", () => {
         showPageNumber: false,
         showCaption: false,
         showDownloadButton: false,
+        showDownloadExtButton: false,
         classList: "lightbox animation fadeIn",
       });
       expect(lightboxEvent.broadcastLightboxEvent).toHaveBeenCalledTimes(1);
@@ -154,7 +157,7 @@ describe("[ Unit - LightboxComponent ]", () => {
       fixture.componentInstance["_event"].load = jasmine.createSpy("load");
       spyOn(lightboxEvent, "broadcastLightboxEvent");
       fixture.componentInstance.prevImage();
-      expect(fixture.componentInstance.ui).toEqual({
+      expect(fixture.componentInstance.ui()).toEqual({
         showReloader: true,
         showLeftArrow: false,
         showRightArrow: false,
@@ -164,6 +167,7 @@ describe("[ Unit - LightboxComponent ]", () => {
         showPageNumber: false,
         showCaption: false,
         showDownloadButton: false,
+        showDownloadExtButton: false,
         classList: "lightbox animation fadeIn",
       });
       expect(lightboxEvent.broadcastLightboxEvent).toHaveBeenCalledTimes(1);
@@ -176,7 +180,7 @@ describe("[ Unit - LightboxComponent ]", () => {
       fixture.componentInstance["_event"].load = jasmine.createSpy("load");
       spyOn(lightboxEvent, "broadcastLightboxEvent");
       fixture.componentInstance.nextImage();
-      expect(fixture.componentInstance.ui).toEqual({
+      expect(fixture.componentInstance.ui()).toEqual({
         showReloader: true,
         showLeftArrow: false,
         showRightArrow: false,
@@ -186,6 +190,7 @@ describe("[ Unit - LightboxComponent ]", () => {
         showPageNumber: false,
         showCaption: false,
         showDownloadButton: false,
+        showDownloadExtButton: false,
         classList: "lightbox animation fadeIn",
       });
       expect(lightboxEvent.broadcastLightboxEvent).toHaveBeenCalledTimes(1);

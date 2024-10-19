@@ -1,4 +1,3 @@
-import { DOCUMENT } from "@angular/common";
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -24,7 +23,6 @@ import { IEvent, LIGHTBOX_EVENT, LightboxEvent } from "../../services/lightbox-e
 })
 export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
   private _lightboxEvent = inject(LightboxEvent);
-  private _documentRef: Document = inject(DOCUMENT);
 
   public options = model<Partial<LightboxConfig>>();
   public cmpRef = model<ComponentRef<LightboxOverlayComponent>>();
@@ -59,8 +57,8 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   private _sizeOverlay(): void {
-    const width = this._getOverlayWidth();
-    const height = this._getOverlayHeight();
+    const width = document.body.scrollWidth;
+    const height = document.body.scrollHeight;
 
     this._elemRef.nativeElement.style.width = `${width}px`;
     this._elemRef.nativeElement.style.height = `${height}px`;
@@ -84,25 +82,5 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.cmpRef()?.destroy();
     }, this.options()!.fadeDuration! * 1000);
-  }
-
-  private _getOverlayWidth(): number {
-    return Math.max(
-      this._documentRef.body.scrollWidth,
-      this._documentRef.body.offsetWidth,
-      this._documentRef.documentElement.clientWidth,
-      this._documentRef.documentElement.scrollWidth,
-      this._documentRef.documentElement.offsetWidth
-    );
-  }
-
-  private _getOverlayHeight(): number {
-    return Math.max(
-      this._documentRef.body.scrollHeight,
-      this._documentRef.body.offsetHeight,
-      this._documentRef.documentElement.clientHeight,
-      this._documentRef.documentElement.scrollHeight,
-      this._documentRef.documentElement.offsetHeight
-    );
   }
 }

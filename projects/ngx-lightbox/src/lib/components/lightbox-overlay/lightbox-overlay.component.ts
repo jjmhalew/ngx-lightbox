@@ -1,3 +1,4 @@
+import { DOCUMENT } from "@angular/common";
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -23,6 +24,7 @@ import { IEvent, LIGHTBOX_EVENT, LightboxEvent } from "../../services/lightbox-e
 })
 export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
   private _lightboxEvent = inject(LightboxEvent);
+  private _documentRef: Document = inject(DOCUMENT);
 
   public options = model<Partial<LightboxConfig>>();
   public cmpRef = model<ComponentRef<LightboxOverlayComponent>>();
@@ -57,8 +59,8 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   private _sizeOverlay(): void {
-    const width = document.body.scrollWidth;
-    const height = document.body.scrollHeight;
+    const width = this._documentRef.body.scrollWidth;
+    const height = this._documentRef.body.scrollHeight;
 
     this._elemRef.nativeElement.style.width = `${width}px`;
     this._elemRef.nativeElement.style.height = `${height}px`;

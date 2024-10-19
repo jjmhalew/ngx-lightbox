@@ -13,9 +13,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "allowedCommonJsDependencies": [
-              "file-saver"
-            ],
+            "allowedCommonJsDependencies": [],
             "outputPath": {
               "base": "dist/ngx-lightbox-demo"
             },

@@ -402,7 +402,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
       // use enableTransition to prevent infinite loader
       if (this.options().enableTransition) {
         this._event.transitions = [];
-        ["transitionend", "webkitTransitionEnd", "oTransitionEnd", "MSTransitionEnd"].forEach(eventName => {
+        ["transitionend"].forEach(eventName => {
           this._event.transitions.push(
             this._rendererRef.listen(this._outerContainerElem()!.nativeElement, eventName, (event: any) => {
               if (event.target === event.currentTarget) {

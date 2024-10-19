@@ -440,7 +440,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   private _prepareComponent(): void {
-    // add css3 animation
+    // add css animation
     this._addCssAnimation();
 
     // position the image according to user's option
@@ -474,7 +474,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   /**
-   * addCssAnimation add css3 classes for animate lightbox
+   * addCssAnimation add classes for animate lightbox
    */
   private _addCssAnimation(): void {
     const resizeDuration = this.options().resizeDuration;

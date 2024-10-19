@@ -1,5 +1,5 @@
 import { DOCUMENT } from "@angular/common";
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, inject, Injectable, Injector } from "@angular/core";
+import { ApplicationRef, inject, Injectable, Injector, ViewContainerRef } from "@angular/core";
 
 import { LightboxComponent } from "../components/lightbox/lightbox.component";
 import { LightboxOverlayComponent } from "../components/lightbox-overlay/lightbox-overlay.component";
@@ -12,20 +12,16 @@ export class Lightbox {
   private _lightboxConfig = inject(LightboxConfig);
   private _lightboxEvent = inject(LightboxEvent);
   private _documentRef: Document = inject(DOCUMENT);
-
-  // private viewContainerRef = inject(ViewContainerRef);
-  private _componentFactoryResolver = inject(ComponentFactoryResolver);
   private _injector = inject(Injector);
-
-  constructor() {}
+  private _viewContainerRef = inject(ViewContainerRef);
 
   public open(album: IAlbum[], curIndex = 0, options = {}): void {
-    // const overlayComponentRef = this.viewContainerRef.createComponent(LightboxOverlayComponent);
-    // const componentRef = this.viewContainerRef.createComponent(LightboxComponent);
-
-    // TODO: replace old way with new way (viewContainerRef)
-    const overlayComponentRef = this._createComponent(LightboxOverlayComponent);
-    const componentRef = this._createComponent(LightboxComponent);
+    const overlayComponentRef = this._viewContainerRef.createComponent(LightboxOverlayComponent, {
+      injector: this._injector
+    });
+    const componentRef = this._viewContainerRef.createComponent(LightboxComponent, {
+      injector: this._injector
+    });
 
     const newOptions: Partial<LightboxConfig> = {};
 
@@ -60,12 +56,5 @@ export class Lightbox {
       containerElement.appendChild(overlayComponentRef.location.nativeElement);
       containerElement.appendChild(componentRef.location.nativeElement);
     });
-  }
-
-  private _createComponent<T>(ComponentClass: new (...args: any[]) => T): ComponentRef<T> {
-    const factory = this._componentFactoryResolver.resolveComponentFactory(ComponentClass);
-    const component = factory.create(this._injector);
-
-    return component;
   }
 }

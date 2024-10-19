@@ -10,7 +10,6 @@ import {
   model,
   OnDestroy,
   OnInit,
-  Renderer2,
   SecurityContext,
   signal,
   viewChild,
@@ -35,8 +34,6 @@ import { LightboxUiConfig } from "../../services/lightbox-ui-config";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnInit {
-  private _elemRef = inject(ElementRef);
-  private _rendererRef = inject(Renderer2);
   private _lightboxEvent = inject(LightboxEvent);
   public _lightboxElem = inject(ElementRef);
   private _lightboxWindowRef = inject(LightboxWindowRef);
@@ -77,12 +74,12 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   private _windowRef: Window & typeof globalThis;
   private rotate = signal<number>(0);
 
-  constructor() {
+  constructor(private elemRef: ElementRef<HTMLDivElement>) {
     // initialize data
     this._windowRef = this._lightboxWindowRef.nativeWindow;
+    this._lightboxElem = elemRef;
 
     this._event = {};
-    this._lightboxElem = this._elemRef;
     this._event.subscription = this._lightboxEvent.lightboxEvent$.subscribe((event: IEvent) => this._onReceivedEvent(event));
   }
 
@@ -357,8 +354,8 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
         }
       }
 
-      this._rendererRef.setStyle(this._imageElem()!.nativeElement, "width", `${imageWidth}px`);
-      this._rendererRef.setStyle(this._imageElem()!.nativeElement, "height", `${imageHeight}px`);
+      this._imageElem()!.nativeElement.style.width = `${imageWidth}px`;
+      this._imageElem()!.nativeElement.style.height = `${imageHeight}px`;
     }
 
     this._sizeContainer(imageWidth, imageHeight);
@@ -375,7 +372,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     const viewOffset = windowHeight / 2 - imageHeight / 2;
     const topDistance = scrollOffset + viewOffset;
 
-    this._rendererRef.setStyle(this._lightboxElem.nativeElement, "top", `${topDistance}px`);
+    this._lightboxElem.nativeElement.style.top = `${topDistance}px`;
   }
 
   private _sizeContainer(imageWidth: number, imageHeight: number): void {
@@ -396,8 +393,8 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
 
     // make sure that distances are large enough for transitionend event to be fired, at least 5px.
     if (Math.abs(oldWidth - newWidth) + Math.abs(oldHeight - newHeight) > 5) {
-      this._rendererRef.setStyle(this._outerContainerElem()!.nativeElement, "width", `${newWidth}px`);
-      this._rendererRef.setStyle(this._outerContainerElem()!.nativeElement, "height", `${newHeight}px`);
+      this._outerContainerElem()!.nativeElement.style.width = `${newWidth}px`;
+      this._outerContainerElem()!.nativeElement.style.height = `${newHeight}px`;
 
       // bind resize event to outer container
       // use enableTransition to prevent infinite loader
@@ -405,7 +402,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
         this._event.transitions = [];
         ["transitionend", "webkitTransitionEnd", "oTransitionEnd", "MSTransitionEnd"].forEach(eventName => {
           this._event.transitions.push(
-            this._rendererRef.listen(this._outerContainerElem()!.nativeElement, eventName, (event: any) => {
+            this._outerContainerElem()!.nativeElement.addEventListener(eventName, (event: any) => {
               if (event.target === event.currentTarget) {
                 this._postResize(newWidth, newHeight);
               }
@@ -430,7 +427,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
       this._event.transitions = [];
     }
 
-    this._rendererRef.setStyle(this._dataContainerElem()!.nativeElement, "width", `${newWidth}px`);
+    this._dataContainerElem()!.nativeElement.style.width = `${newWidth}px`;
     this._showImage();
   }
 
@@ -466,15 +463,15 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     const left = this._windowRef.scrollX || this._documentRef.documentElement.scrollLeft;
 
     if (!this.options().centerVertically) {
-      this._rendererRef.setStyle(this._lightboxElem.nativeElement, "top", `${top}px`);
+      this._lightboxElem.nativeElement.style.top = `${top}px`;
     }
 
-    this._rendererRef.setStyle(this._lightboxElem.nativeElement, "left", `${left}px`);
-    this._rendererRef.setStyle(this._lightboxElem.nativeElement, "display", "block");
+    this._lightboxElem.nativeElement.style.left = `${left}px`;
+    this._lightboxElem.nativeElement.style.display = "block";
 
     // disable scrolling of the page while open
     if (this.options().disableScrolling) {
-      this._rendererRef.addClass(this._documentRef.documentElement, "lb-disable-scrolling");
+      this._documentRef.documentElement.classList.add("lb-disable-scrolling");
     }
   }
 
@@ -485,18 +482,18 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     const resizeDuration = this.options().resizeDuration;
     const fadeDuration = this.options().fadeDuration;
 
-    this._rendererRef.setStyle(this._lightboxElem.nativeElement, "animation-duration", `${fadeDuration}s`);
-    this._rendererRef.setStyle(this._outerContainerElem()!.nativeElement, "transition-duration", `${resizeDuration}s`);
-    this._rendererRef.setStyle(this._dataContainerElem()!.nativeElement, "animation-duration", `${fadeDuration}s`);
-    this._rendererRef.setStyle(this._imageElem()!.nativeElement, "animation-duration", `${fadeDuration}s`);
-    this._rendererRef.setStyle(this._captionElem()!.nativeElement, "animation-duration", `${fadeDuration}s`);
-    this._rendererRef.setStyle(this._numberElem()!.nativeElement, "animation-duration", `${fadeDuration}s`);
+    this._lightboxElem.nativeElement.style.animationDuration = `${fadeDuration}s`;
+    this._outerContainerElem()!.nativeElement.style.animationDuration = `${resizeDuration}s`;
+    this._dataContainerElem()!.nativeElement.style.animationDuration = `${fadeDuration}s`;
+    this._imageElem()!.nativeElement.style.animationDuration = `${fadeDuration}s`;
+    this._captionElem()!.nativeElement.style.animationDuration = `${fadeDuration}s`;
+    this._numberElem()!.nativeElement.style.animationDuration = `${fadeDuration}s`;
   }
 
   private _end(): void {
     this.ui().classList = "lightbox animation fadeOut";
     if (this.options().disableScrolling) {
-      this._rendererRef.removeClass(this._documentRef.documentElement, "lb-disable-scrolling");
+      this._documentRef.documentElement.classList.remove("lb-disable-scrolling");
     }
     setTimeout(() => {
       this.cmpRef()?.destroy();
@@ -559,30 +556,24 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     if (this.albums().length > 1) {
       if (this.options().wrapAround) {
         if (alwaysShowNav) {
-          // alternatives this.$lightbox.find('.lb-prev, .lb-next').css('opacity', '1');
-          this._rendererRef.setStyle(this._leftArrowElem()!.nativeElement, "opacity", "1");
-          this._rendererRef.setStyle(this._rightArrowElem()!.nativeElement, "opacity", "1");
+          this._leftArrowElem()!.nativeElement.style.opacity = "1";
+          this._rightArrowElem()!.nativeElement.style.opacity = "1";
         }
 
-        // alternatives this.$lightbox.find('.lb-prev, .lb-next').show();
         this._showLeftArrowNav();
         this._showRightArrowNav();
       } else {
         if (this.currentImageIndex() > 0) {
-          // alternatives this.$lightbox.find('.lb-prev').show();
           this._showLeftArrowNav();
           if (alwaysShowNav) {
-            // alternatives this.$lightbox.find('.lb-prev').css('opacity', '1');
-            this._rendererRef.setStyle(this._leftArrowElem()!.nativeElement, "opacity", "1");
+            this._leftArrowElem()!.nativeElement.style.opacity = "1";
           }
         }
 
         if (this.currentImageIndex() < this.albums().length - 1) {
-          // alternatives this.$lightbox.find('.lb-next').show();
           this._showRightArrowNav();
           if (alwaysShowNav) {
-            // alternatives this.$lightbox.find('.lb-next').css('opacity', '1');
-            this._rendererRef.setStyle(this._rightArrowElem()!.nativeElement, "opacity", "1");
+            this._rightArrowElem()!.nativeElement.style.opacity = "1";
           }
         }
       }
@@ -602,7 +593,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   }
 
   private _enableKeyboardNav(): void {
-    this._event.keyup = this._rendererRef.listen("document", "keyup", (event: KeyboardEvent) => {
+    this._documentRef.documentElement.addEventListener("keyup", (event: KeyboardEvent) => {
       this._keyboardAction(event);
     });
   }

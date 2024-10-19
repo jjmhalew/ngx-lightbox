@@ -233,7 +233,6 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
   private _resetImage(): void {
     this.rotate.set(0);
     this._imageElem()!.nativeElement.style.transform = `rotate(${this.rotate()}deg)`;
-    this._imageElem()!.nativeElement.style.webkitTransform = `rotate(${this.rotate()}deg)`;
   }
 
   private _calcTransformPoint(): void {

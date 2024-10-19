@@ -401,16 +401,15 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
       // bind resize event to outer container
       // use enableTransition to prevent infinite loader
       if (this.options().enableTransition) {
-        this._event.transitions = [];
-        ["transitionend"].forEach(eventName => {
-          this._event.transitions.push(
-            this._rendererRef.listen(this._outerContainerElem()!.nativeElement, eventName, (event: TransitionEvent) => {
-              if (event.target === event.currentTarget) {
-                this._postResize(newWidth, newHeight);
-              }
-            })
-          );
-        });
+        this._event.transition = this._rendererRef.listen(
+          this._outerContainerElem()!.nativeElement,
+          "transitionend",
+          (event: TransitionEvent) => {
+            if (event.target === event.currentTarget) {
+              this._postResize(newWidth, newHeight);
+            }
+          }
+        );
       } else {
         this._postResize(newWidth, newHeight);
       }
@@ -421,12 +420,9 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
 
   private _postResize(newWidth: number, newHeight: number): void {
     // unbind resize event
-    if (Array.isArray(this._event.transitions)) {
-      this._event.transitions.forEach((eventHandler: any) => {
-        eventHandler();
-      });
-
-      this._event.transitions = [];
+    if (this._event.transition !== undefined) {
+      this._event.transition(); // Remove the listener
+      this._event.transition = undefined; // Clean up
     }
 
     this._rendererRef.setStyle(this._dataContainerElem()!.nativeElement, "width", `${newWidth}px`);

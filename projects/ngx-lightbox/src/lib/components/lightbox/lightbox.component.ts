@@ -404,7 +404,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
         this._event.transitions = [];
         ["transitionend"].forEach(eventName => {
           this._event.transitions.push(
-            this._rendererRef.listen(this._outerContainerElem()!.nativeElement, eventName, (event: any) => {
+            this._rendererRef.listen(this._outerContainerElem()!.nativeElement, eventName, (event: TransitionEvent) => {
               if (event.target === event.currentTarget) {
                 this._postResize(newWidth, newHeight);
               }

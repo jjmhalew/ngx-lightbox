@@ -558,29 +558,23 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     if (this.albums().length > 1) {
       if (this.options().wrapAround) {
         if (alwaysShowNav) {
-          // alternatives this.$lightbox.find('.lb-prev, .lb-next').css('opacity', '1');
           this._rendererRef.setStyle(this._leftArrowElem()!.nativeElement, "opacity", "1");
           this._rendererRef.setStyle(this._rightArrowElem()!.nativeElement, "opacity", "1");
         }
 
-        // alternatives this.$lightbox.find('.lb-prev, .lb-next').show();
         this._showLeftArrowNav();
         this._showRightArrowNav();
       } else {
         if (this.currentImageIndex() > 0) {
-          // alternatives this.$lightbox.find('.lb-prev').show();
           this._showLeftArrowNav();
           if (alwaysShowNav) {
-            // alternatives this.$lightbox.find('.lb-prev').css('opacity', '1');
             this._rendererRef.setStyle(this._leftArrowElem()!.nativeElement, "opacity", "1");
           }
         }
 
         if (this.currentImageIndex() < this.albums().length - 1) {
-          // alternatives this.$lightbox.find('.lb-next').show();
           this._showRightArrowNav();
           if (alwaysShowNav) {
-            // alternatives this.$lightbox.find('.lb-next').css('opacity', '1');
             this._rendererRef.setStyle(this._rightArrowElem()!.nativeElement, "opacity", "1");
           }
         }

@@ -9,6 +9,7 @@ import {
   inject,
   model,
   OnDestroy,
+  Renderer2,
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
@@ -23,6 +24,8 @@ import { IEvent, LIGHTBOX_EVENT, LightboxEvent } from "../../services/lightbox-e
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
+  private _elemRef = inject(ElementRef);
+  private _rendererRef = inject(Renderer2);
   private _lightboxEvent = inject(LightboxEvent);
   private _documentRef: Document = inject(DOCUMENT);
 
@@ -31,7 +34,7 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
 
   private _subscription: Subscription;
 
-  constructor(private _elemRef: ElementRef<HTMLDivElement>) {
+  constructor() {
     this._elemRef.nativeElement.className = "lightboxOverlay animation fadeInOverlay";
     this._subscription = this._lightboxEvent.lightboxEvent$.subscribe((event: IEvent) => this._onReceivedEvent(event));
   }
@@ -45,7 +48,7 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     const fadeDuration = this.options()!.fadeDuration;
 
-    this._elemRef.nativeElement.style.animationDuration = `${fadeDuration}s`;
+    this._rendererRef.setStyle(this._elemRef.nativeElement, "animation-duration", `${fadeDuration}s`);
     this._sizeOverlay();
   }
 
@@ -62,8 +65,8 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
     const width = this._documentRef.body.scrollWidth;
     const height = this._documentRef.body.scrollHeight;
 
-    this._elemRef.nativeElement.style.width = `${width}px`;
-    this._elemRef.nativeElement.style.height = `${height}px`;
+    this._rendererRef.setStyle(this._elemRef.nativeElement, "width", `${width}px`);
+    this._rendererRef.setStyle(this._elemRef.nativeElement, "height", `${height}px`);
   }
 
   private _onReceivedEvent(event: IEvent): void {

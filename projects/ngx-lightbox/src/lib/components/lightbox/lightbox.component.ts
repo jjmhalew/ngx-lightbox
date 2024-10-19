@@ -440,7 +440,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     if (!this.options().disableKeyboardNav) {
       this._enableKeyboardNav();
     }
-    this._changeDetectorRef.detectChanges(); // needed due to otherwise zoneless reload icon will stay in-screen until click-event happens
+    this._changeDetectorRef.detectChanges(); // needed due to zoneless, otherwise reload icon will stay in-screen until user clicks
   }
 
   private _prepareComponent(): void {

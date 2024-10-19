@@ -1,6 +1,6 @@
 {
   "name": "@jjmhalew/ngx-lightbox",
-  "version": "18.2.3",
+  "version": "18.2.4",
   "description": "Lightbox for Angular >= 18 (zoneless). Originally by themyth92",
   "author": "Jim Halewijn",
   "license": "MIT",

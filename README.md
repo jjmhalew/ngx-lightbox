@@ -2,12 +2,13 @@
 
 <img width="100px" src="./demo/img/ngx-lightbox-logo.svg">
 
-A [lightbox2](https://github.com/lokesh/lightbox2) implementation port to use with Angular >= 18 (zoneless)
-
+A [lightbox2](https://github.com/lokesh/lightbox2) implementation port to use with Angular >= 18 (zoneless)  
 
 ## Installation
 
-`npm install @jjmhalew/ngx-lightbox`
+`npm install @jjmhalew/ngx-lightbox`  
+`18.X.X` is for Angular 18  
+`19.X.X` is for Angular 19  
 
 Update your `angular.json`
 

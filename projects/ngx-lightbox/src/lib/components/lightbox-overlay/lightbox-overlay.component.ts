@@ -17,11 +17,10 @@ import { LightboxConfig } from "../../services/lightbox-config.service";
 import { IEvent, LIGHTBOX_EVENT, LightboxEvent } from "../../services/lightbox-event.service";
 
 @Component({
-  selector: "[lb-overlay]",
-  template: "",
-  standalone: true,
-  imports: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "[lb-overlay]",
+    template: "",
+    imports: [],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
   private _elemRef = inject(ElementRef);

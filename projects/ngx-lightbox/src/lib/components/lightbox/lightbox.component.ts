@@ -23,16 +23,15 @@ import { IAlbum, IEvent, LIGHTBOX_EVENT, LightboxEvent, LightboxWindowRef } from
 import { LightboxUiConfig } from "../../services/lightbox-ui-config";
 
 @Component({
-  templateUrl: "./lightbox.component.html",
-  selector: "[lb-content]",
-  host: {
-    "(click)": "close($event)",
-    "[class]": "ui().classList",
-  },
-  standalone: true,
-  styleUrl: "./lightbox.component.scss",
-  imports: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: "./lightbox.component.html",
+    selector: "[lb-content]",
+    host: {
+        "(click)": "close($event)",
+        "[class]": "ui().classList",
+    },
+    styleUrl: "./lightbox.component.scss",
+    imports: [],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnInit {
   private _elemRef = inject(ElementRef);

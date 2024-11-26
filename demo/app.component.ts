@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
 import { IAlbum, IEvent, Lightbox, LIGHTBOX_EVENT, LightboxConfig, LightboxEvent, LightboxModule } from "ngx-lightbox";
 import { Subscription } from "rxjs";
@@ -24,8 +23,7 @@ import { Subscription } from "rxjs";
   host: {
     class: "columns",
   },
-  standalone: true,
-  imports: [CommonModule, LightboxModule],
+  imports: [LightboxModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {

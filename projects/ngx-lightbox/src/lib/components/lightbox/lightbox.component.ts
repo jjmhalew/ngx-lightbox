@@ -1,4 +1,4 @@
-import { DOCUMENT } from "@angular/common";
+
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -14,6 +14,7 @@ import {
   SecurityContext,
   signal,
   viewChild,
+  DOCUMENT
 } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { FileSaverService } from "ngx-filesaver";

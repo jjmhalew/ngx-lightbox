@@ -19,7 +19,6 @@
             },
             "index": "index.html",
             "browser": "demo/main.ts",
-            "polyfills": [],
             "tsConfig": "tsconfig.json",
             "assets": [
               {
@@ -31,8 +30,7 @@
             "styles": [
               "./projects/ngx-lightbox/src/lib/styles/lightbox.scss",
               "demo/app.css"
-            ],
-            "scripts": []
+            ]
           },
           "configurations": {
             "production": {
@@ -61,7 +59,7 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "polyfills": [
               "zone.js",
@@ -90,7 +88,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ngx-lightbox/ng-package.json"
           },
@@ -105,7 +103,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/ngx-lightbox/tsconfig.spec.json",
             "polyfills": [
@@ -138,6 +136,30 @@
     },
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
+    },
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

@@ -7,8 +7,9 @@ A [lightbox2](https://github.com/lokesh/lightbox2) implementation port to use wi
 ## Installation
 
 `npm install @jjmhalew/ngx-lightbox`  
-`18.X.X` is for Angular 18  
+`20.X.X` is for Angular 20  
 `19.X.X` is for Angular 19  
+`18.X.X` is for Angular 18  
 
 Update your `angular.json`
 

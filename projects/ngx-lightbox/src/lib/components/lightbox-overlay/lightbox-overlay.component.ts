@@ -1,4 +1,4 @@
-import { DOCUMENT } from "@angular/common";
+
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -10,6 +10,7 @@ import {
   model,
   OnDestroy,
   Renderer2,
+  DOCUMENT
 } from "@angular/core";
 import { Subscription } from "rxjs";
 

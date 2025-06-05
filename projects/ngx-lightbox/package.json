@@ -20,9 +20,9 @@
     "library"
   ],
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0",
-    "ngx-filesaver": "19.0.0"
+    "@angular/common": "^20.0.1",
+    "@angular/core": "^20.0.1",
+    "ngx-filesaver": "20.0.1"
   },
   "dependencies": {
     "tslib": "^2.8.1"

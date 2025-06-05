@@ -14,12 +14,7 @@
           "builder": "@angular/build:application",
           "options": {
             "allowedCommonJsDependencies": [],
-            "outputPath": {
-              "base": "dist/ngx-lightbox-demo"
-            },
-            "index": "index.html",
             "browser": "demo/main.ts",
-            "polyfills": [],
             "tsConfig": "tsconfig.json",
             "assets": [
               {
@@ -31,8 +26,7 @@
             "styles": [
               "./projects/ngx-lightbox/src/lib/styles/lightbox.scss",
               "demo/app.css"
-            ],
-            "scripts": []
+            ]
           },
           "configurations": {
             "production": {
@@ -61,7 +55,7 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "polyfills": [
               "zone.js",
@@ -105,7 +99,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/ngx-lightbox/tsconfig.spec.json",
             "polyfills": [

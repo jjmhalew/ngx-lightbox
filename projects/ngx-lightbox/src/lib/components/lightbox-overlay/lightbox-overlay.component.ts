@@ -10,7 +10,8 @@ import {
   model,
   OnDestroy,
   Renderer2,
-  DOCUMENT
+  DOCUMENT,
+  signal
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
@@ -34,6 +35,8 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
 
   private _subscription: Subscription;
 
+  private _isClosing = signal<boolean>(false);
+
   constructor() {
     this._elemRef.nativeElement.className = "lightboxOverlay animation fadeInOverlay";
     this._subscription = this._lightboxEvent.lightboxEvent$.subscribe((event: IEvent) => this._onReceivedEvent(event));
@@ -54,7 +57,9 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
 
   @HostListener("window:resize")
   public onResize(): void {
-    this._sizeOverlay();
+    if (!this._isClosing()) {
+      this._sizeOverlay();
+    }
   }
 
   public ngOnDestroy(): void {
@@ -80,6 +85,8 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   private _end(): void {
+     this._isClosing.set(true);
+
     this._elemRef.nativeElement.className = "lightboxOverlay animation fadeOutOverlay";
 
     // queue self destruction after the animation has finished

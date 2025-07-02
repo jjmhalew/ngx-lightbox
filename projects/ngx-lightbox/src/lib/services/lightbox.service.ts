@@ -1,5 +1,13 @@
 import { DOCUMENT } from "@angular/common";
-import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, inject, Injectable, inputBinding } from "@angular/core";
+import {
+  ApplicationRef,
+  ComponentRef,
+  createComponent,
+  EnvironmentInjector,
+  inject,
+  Injectable,
+  inputBinding,
+} from "@angular/core";
 
 import { LightboxComponent } from "../components/lightbox/lightbox.component";
 import { LightboxOverlayComponent } from "../components/lightbox-overlay/lightbox-overlay.component";
@@ -16,10 +24,13 @@ export class Lightbox {
   private _documentRef: Document = inject(DOCUMENT);
 
   public open(album: IAlbum[], curIndex = 0, options = {}): void {
-    const newOptions: Partial<LightboxConfig> = {};
+    const newOptions: Partial<LightboxConfig> = {
+      ...this._lightboxConfig,
+      ...options
+    };
 
-    const overlayComponentRef: ComponentRef<LightboxOverlayComponent> =
-    createComponent(LightboxOverlayComponent, {
+    const overlayComponentRef: ComponentRef<LightboxOverlayComponent>
+    = createComponent(LightboxOverlayComponent, {
       environmentInjector: this._applicationRef.injector,
       elementInjector: this.environmentInjector,
       bindings: [
@@ -27,8 +38,9 @@ export class Lightbox {
         inputBinding("cmpRef", () => overlayComponentRef)
       ],
     });
-    const componentRef: ComponentRef<LightboxComponent> = 
-        createComponent(LightboxComponent, {
+
+    const componentRef: ComponentRef<LightboxComponent>
+    = createComponent(LightboxComponent, {
       environmentInjector: this._applicationRef.injector,
       elementInjector: this.environmentInjector,
       bindings: [
@@ -39,26 +51,20 @@ export class Lightbox {
       ],
     });
 
-    // broadcast open event
+    this._applicationRef.attachView(overlayComponentRef.hostView);
+    this._applicationRef.attachView(componentRef.hostView);
+
+    overlayComponentRef.onDestroy(() =>
+      this._applicationRef.detachView(overlayComponentRef.hostView)
+    );
+    componentRef.onDestroy(() =>
+      this._applicationRef.detachView(componentRef.hostView)
+    );
+
+    const containerElement = newOptions.containerElementResolver!(this._documentRef);
+    containerElement.appendChild(overlayComponentRef.location.nativeElement);
+    containerElement.appendChild(componentRef.location.nativeElement);
+
     this._lightboxEvent.broadcastLightboxEvent({ id: LIGHTBOX_EVENT.OPEN });
-    Object.assign(newOptions, this._lightboxConfig, options);
-
-    // FIXME: not sure why last event is broadcasted (which is CLOSED) and make
-    // lightbox can not be opened the second time.
-    // Need to timeout so that the OPEN event is set before component is initialized
-    setTimeout(() => {
-      this._applicationRef.attachView(overlayComponentRef.hostView);
-      this._applicationRef.attachView(componentRef.hostView);
-      overlayComponentRef.onDestroy(() => {
-        this._applicationRef.detachView(overlayComponentRef.hostView);
-      });
-      componentRef.onDestroy(() => {
-        this._applicationRef.detachView(componentRef.hostView);
-      });
-
-      const containerElement = newOptions.containerElementResolver!(this._documentRef);
-      containerElement.appendChild(overlayComponentRef.location.nativeElement);
-      containerElement.appendChild(componentRef.location.nativeElement);
-    });
   }
 }

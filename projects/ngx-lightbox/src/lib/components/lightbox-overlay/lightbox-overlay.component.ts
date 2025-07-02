@@ -83,9 +83,8 @@ export class LightboxOverlayComponent implements AfterViewInit, OnDestroy {
     this._elemRef.nativeElement.className = "lightboxOverlay animation fadeOutOverlay";
 
     // queue self destruction after the animation has finished
-    // FIXME: not sure if there is any way better than this
-    setTimeout(() => {
+    this._rendererRef.listen(this._elemRef.nativeElement, 'animationend', () => {
       this.cmpRef()?.destroy();
-    }, this.options()!.fadeDuration! * 1000);
+    });
   }
 }

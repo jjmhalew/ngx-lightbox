@@ -13,11 +13,12 @@
     "url": "https://github.com/jjmhalew/ngx-lightbox/issues"
   },
   "keywords": [
-    "lightbox",
     "angular",
-    "zoneless",
     "directives",
-    "library"
+    "library",
+    "lightbox",
+    "overlay",
+    "zoneless"
   ],
   "peerDependencies": {
     "@angular/common": "^21.0.0",

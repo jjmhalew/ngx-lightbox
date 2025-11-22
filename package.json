@@ -1,6 +1,6 @@
 {
   "name": "@jjmhalew/ngx-lightbox",
-  "version": "20.1.0",
+  "version": "21.0.0",
   "description": "A port >= Angular 18 for lightbox2. Forked and build upon from themyth92",
   "main": "index.js",
   "scripts": {

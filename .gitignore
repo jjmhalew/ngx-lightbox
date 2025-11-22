@@ -12,7 +12,7 @@ npm-debug.log
 yarn-error.log
 
 # IDEs and editors
-/.idea
+.idea/
 .project
 .classpath
 .c9/
@@ -38,6 +38,7 @@ yarn-error.log
 testem.log
 /typings
 .firebase
+__screenshots__/
 
 # System files
 .DS_Store

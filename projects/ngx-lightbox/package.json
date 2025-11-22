@@ -1,6 +1,6 @@
 {
   "name": "@jjmhalew/ngx-lightbox",
-  "version": "20.1.0",
+  "version": "21.0.0",
   "description": "Lightbox for Angular >= 18 (zoneless). Originally by themyth92",
   "author": "Jim Halewijn",
   "license": "MIT",
@@ -13,15 +13,16 @@
     "url": "https://github.com/jjmhalew/ngx-lightbox/issues"
   },
   "keywords": [
-    "lightbox",
     "angular",
-    "zoneless",
     "directives",
-    "library"
+    "library",
+    "lightbox",
+    "overlay",
+    "zoneless"
   ],
   "peerDependencies": {
-    "@angular/common": "^20.0.1",
-    "@angular/core": "^20.0.1",
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
     "ngx-filesaver": "20.0.0"
   },
   "dependencies": {

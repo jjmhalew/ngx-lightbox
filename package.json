@@ -3,6 +3,13 @@
   "version": "20.1.0",
   "description": "A port >= Angular 18 for lightbox2. Forked and build upon from themyth92",
   "main": "index.js",
+  "scripts": {
+    "start": "ng serve",
+    "build:ngx-lightbox": "ng build ngx-lightbox",
+    "test": " ng lint && ng test ngx-lightbox",
+    "lint": "ng lint"
+  },
+  "packageManager": "npm@10.9.0",
   "dependencies": {
     "@jjmhalew/ngx-lightbox": "file:dist/ngx-lightbox",
     "ngx-filesaver": "20.0.0",
@@ -33,12 +40,6 @@
     "typescript": "5.9.3",
     "typescript-eslint": "^8.47.0",
     "vitest": "^4.0.13"
-  },
-  "scripts": {
-    "start": "ng serve",
-    "build:ngx-lightbox": "ng build ngx-lightbox",
-    "test": " ng lint && ng test ngx-lightbox",
-    "lint": "ng lint"
   },
   "engines": {
     "node": ">=22"

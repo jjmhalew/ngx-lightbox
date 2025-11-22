@@ -20,8 +20,8 @@
     "library"
   ],
   "peerDependencies": {
-    "@angular/common": "^20.0.1",
-    "@angular/core": "^20.0.1",
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
     "ngx-filesaver": "20.0.0"
   },
   "dependencies": {

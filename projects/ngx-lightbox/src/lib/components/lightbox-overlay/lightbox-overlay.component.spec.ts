@@ -4,7 +4,7 @@ import { describe, it, beforeEach, expect, vi } from "vitest";
 import { LIGHTBOX_EVENT, LightboxEvent } from "../../services/lightbox-event.service";
 import { LightboxOverlayComponent } from "./lightbox-overlay.component";
 
-describe("[ Unit - LightboxOverlayComponent ] (zoneless)", () => {
+describe("[ Unit - LightboxOverlayComponent ]", () => {
   let fixture: ComponentFixture<LightboxOverlayComponent>;
   let lightboxEvent: LightboxEvent;
   let mockData: any;

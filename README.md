@@ -1,3 +1,8 @@
+![Release](https://img.shields.io/github/v/release/jjmhalew/ngx-lightbox)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/jjmhalew/ngx-lightbox)
+![Downloads](https://img.shields.io/npm/dw/@jjmhalew/ngx-lightbox)
+[![License](https://img.shields.io/:license-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
+
 # Ngx-Lightbox
 
 <img width="100px" src="./demo/img/ngx-lightbox-logo.svg">

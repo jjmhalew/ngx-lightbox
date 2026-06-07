@@ -3,13 +3,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
@@ -18,18 +15,19 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "ngx-lightbox": [
-        "./dist/ngx-lightbox"
-      ]
-    },
+      "ngx-lightbox": ["./dist/ngx-lightbox"]
+    }
   },
-  "include": [
-    "demo/**/*"
-  ],
+  "include": ["demo/**/*"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    },
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictInputAccessModifiers": true
   }
 }

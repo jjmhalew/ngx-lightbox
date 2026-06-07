@@ -12,9 +12,9 @@ A [lightbox2](https://github.com/lokesh/lightbox2) implementation port to use wi
 ## Installation
 
 `npm install @jjmhalew/ngx-lightbox`  
+`22.X.X` is for Angular 22  
 `21.X.X` is for Angular 21  
 `20.X.X` is for Angular 20  
-`19.X.X` is for Angular 19  
 
 Update your `angular.json`
 

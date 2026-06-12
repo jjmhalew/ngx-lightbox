@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Service } from "@angular/core";
 
-@Injectable({ providedIn: "root" })
+@Service()
 export class LightboxConfig {
   public fadeDuration: number = 0.7;
   public resizeDuration: number = 0.5;

@@ -14,7 +14,7 @@ import { LightboxOverlayComponent } from "../components/lightbox-overlay/lightbo
 import { LightboxConfig } from "./lightbox-config.service";
 import { IAlbum, LIGHTBOX_EVENT, LightboxEvent } from "./lightbox-event.service";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class Lightbox {
   private _applicationRef = inject(ApplicationRef);
   private environmentInjector = inject(EnvironmentInjector);

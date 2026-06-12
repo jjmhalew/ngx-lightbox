@@ -29,17 +29,23 @@ Update your `angular.json`
 
 ## Usage
 
-### Module:
+### Setup (optional)
 
-Import `LightboxModule` from `@jjmhalew/ngx-lightbox` in your `NgModule` or `Component`
+No module import is required — all lightbox services are provided in root, so you can inject `Lightbox` directly in any component.
 
-```javascript
-import { LightboxModule } from '@jjmhalew/ngx-lightbox';
+To override the default config application-wide, add `provideLightbox()` to your `app.config.ts` (or `bootstrapApplication` providers):
 
-@NgModule({
-  imports: [ LightboxModule ]
-})
+```typescript
+import { provideLightbox } from '@jjmhalew/ngx-lightbox';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideLightbox({ fadeDuration: 1, wrapAround: true }),
+  ],
+};
 ```
+
+> **Migrating from older versions:** `LightboxModule` is deprecated and is now an empty no-op kept for backwards compatibility. You can safely remove it from your `imports`.
 
 ### Component
 
@@ -162,6 +168,8 @@ Available options based on lightbox2 options
 **NOTE**: You can either override default config or during a specific opening window
 
 1. Override default config
+
+The preferred way is `provideLightbox()` in your `app.config.ts` (see [Setup](#setup-optional)). You can also mutate the injected `LightboxConfig` at runtime:
 
 ```javascript
 import { LightboxConfig } from '@jjmhalew/ngx-lightbox';

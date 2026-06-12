@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
-import { IAlbum, IEvent, Lightbox, LIGHTBOX_EVENT, LightboxConfig, LightboxEvent, LightboxModule } from "ngx-lightbox";
+import { IAlbum, IEvent, Lightbox, LIGHTBOX_EVENT, LightboxEvent } from "ngx-lightbox";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -23,13 +23,11 @@ import { Subscription } from "rxjs";
   host: {
     class: "columns",
   },
-  imports: [LightboxModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   private _lightbox = inject(Lightbox);
   private _lightboxEvent = inject(LightboxEvent);
-  private _lighboxConfig = inject(LightboxConfig);
 
   protected albums = signal<IAlbum[]>([]);
   private _subscription: Subscription | null = null;
@@ -47,9 +45,6 @@ export class AppComponent {
 
       this.albums().push(album);
     }
-
-    // set default config
-    this._lighboxConfig.fadeDuration = 1;
   }
 
   protected open(index: number): void {

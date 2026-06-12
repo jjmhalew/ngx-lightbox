@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Service } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 
 export interface IEvent {
@@ -24,7 +24,7 @@ export enum LIGHTBOX_EVENT {
   DOWNLOAD = 8,
 }
 
-@Injectable()
+@Service()
 export class LightboxEvent {
   private _lightboxEventSource: Subject<IEvent>;
   public lightboxEvent$: Observable<IEvent>;
@@ -43,7 +43,7 @@ function getWindow(): Window & typeof globalThis {
   return window;
 }
 
-@Injectable()
+@Service()
 export class LightboxWindowRef {
   public get nativeWindow(): Window & typeof globalThis {
     return getWindow();

@@ -2,6 +2,7 @@
  * Public API Surface of ngx-lightbox
  */
 
+export { provideLightbox } from "./lib/provide-lightbox";
 export { Lightbox } from "./lib/services/lightbox.service";
 export { LightboxConfig } from "./lib/services/lightbox-config.service";
 export { LightboxEvent, LIGHTBOX_EVENT } from "./lib/services/lightbox-event.service";

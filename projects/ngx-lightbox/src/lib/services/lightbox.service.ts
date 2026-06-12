@@ -5,8 +5,8 @@ import {
   createComponent,
   EnvironmentInjector,
   inject,
-  Injectable,
   inputBinding,
+  Service,
 } from "@angular/core";
 
 import { LightboxComponent } from "../components/lightbox/lightbox.component";
@@ -14,7 +14,7 @@ import { LightboxOverlayComponent } from "../components/lightbox-overlay/lightbo
 import { LightboxConfig } from "./lightbox-config.service";
 import { IAlbum, LIGHTBOX_EVENT, LightboxEvent } from "./lightbox-event.service";
 
-@Injectable()
+@Service()
 export class Lightbox {
   private _applicationRef = inject(ApplicationRef);
   private environmentInjector = inject(EnvironmentInjector);
